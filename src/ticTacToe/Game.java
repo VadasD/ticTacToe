@@ -1,5 +1,5 @@
 package ticTacToe;
-
+import java.util.Scanner;
 public class Game {
 
 	public static void main(String[] args) {
@@ -12,7 +12,17 @@ public class Game {
 		System.out.println("shall we play a game?");
 /*Check if win condition has been met*/
 		while (gameStatus(gameBoard));
-		print
+		PrintDatBoard(gameBoard);
+	}
+	public static void PrintDatBoard(int[][] gameBoard){
+		String newLine = System.getProperty("line.separator");
+		for (int y = 0; y < 3; y++) {
+			for (int x = 0; x < 3; x++) {
+				System.out.print("[ " + gameBoard[x][y] + " ]");
+			}
+			System.out.print(newLine);
+			}
+		}
 /*based on turn counter print array & directions for input P1/P2*/
 /*accept input of correct type*/
 /*check if input is acceptable*/
