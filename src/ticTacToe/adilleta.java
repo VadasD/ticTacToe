@@ -43,9 +43,9 @@ package ticTacToe;
 			System.out.println("Please enter your desired Y coordinate");
 			int y = yi.nextInt(); // TODO needs execption handling
 			if (player1) {
-				gameBoard[x][y] = 1;
+				gameBoard[x][y] = x;
 			} else {
-				gameBoard[x][y] = 2;
+				gameBoard[x][y] = y;
 			}
 			return gameBoard;
 		}
