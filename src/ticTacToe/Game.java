@@ -49,17 +49,14 @@ public class Game {
 	 * @return
 	 */
 	public static char[][] tic(char[][] gameBoard, boolean p1) {
-		// if (p1 = true) {
-		// System.out.println("P1 its your turn");
-		// } else {
-		// System.out.println("P2 its your turn");
-		// }
 		Scanner xi = new Scanner(System.in);
 		Scanner yi = new Scanner(System.in);
 		System.out.println("Enter desired X coordinate");
 		int x = xi.nextInt();
 		System.out.println("Enter desired Y coordinate");
 		int y = yi.nextInt();
+		//if (gameBoard[0] == ('X'|'O')){
+			//System.out.println("try again");//imtrying to check valid moves
 		if (p1) {
 			gameBoard[x][y] = 'X';
 		} else {
@@ -80,9 +77,9 @@ public class Game {
 	 */
 	public static boolean gameStatus(char[][] gameBoard) {
 		char current;
-		char last = 0;
-		char counter = 0;
-		char yDiag = 2;
+		char last = 'l';
+		int counter = 0;
+		int yDiag = 2;
 		for (int x = 0; x < 3; x++) { // check for vertical pattern
 			for (int y = 0; y < 3; y++) {
 				current = gameBoard[x][y];
