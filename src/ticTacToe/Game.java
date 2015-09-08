@@ -48,21 +48,24 @@ public class Game {
 	 * @param p1
 	 * @return
 	 */
-	public static char[][] tic(char[][] gameBoard, boolean p1) {
+	public static boolean tic(char[][] gameBoard, boolean p1) {
+		while(true){
 		Scanner xi = new Scanner(System.in);
 		Scanner yi = new Scanner(System.in);
 		System.out.println("Enter desired X coordinate");
 		int x = xi.nextInt();
 		System.out.println("Enter desired Y coordinate");
 		int y = yi.nextInt();
-		//if (gameBoard[0] == ('X'|'O')){
-			//System.out.println("try again");//imtrying to check valid moves
+		if (gameBoard[x][y] == ('X'|'O')){
+			System.out.println("try again");
+			return true;}//im trying to check valid moves
 		if (p1) {
 			gameBoard[x][y] = 'X';
 		} else {
 			gameBoard[x][y] = 'O';
 		}
-		return gameBoard;
+		return false;
+		}
 	} // closes tic method
 
 	/* accept input of correct type */
