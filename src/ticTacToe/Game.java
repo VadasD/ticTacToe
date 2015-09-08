@@ -48,7 +48,7 @@ public class Game {
 	 * @param p1
 	 * @return
 	 */
-	public static boolean tic(char[][] gameBoard, boolean p1) {
+	public static char[][] tic(char[][] gameBoard, boolean p1) {
 		while(true){
 		Scanner xi = new Scanner(System.in);
 		Scanner yi = new Scanner(System.in);
@@ -56,15 +56,16 @@ public class Game {
 		int x = xi.nextInt();
 		System.out.println("Enter desired Y coordinate");
 		int y = yi.nextInt();
-		if (gameBoard[x][y] == ('X'|'O')){
-			System.out.println("try again");
-			return true;}//im trying to check valid moves
+		if(p1 && gameBoard[x][y] != 'X'|'O')
+		//if (gameBoard[x][y] == ('X'|'O')){
+			//System.out.println("try again");
+			//return false;}//im trying to check valid moves
 		if (p1) {
 			gameBoard[x][y] = 'X';
 		} else {
 			gameBoard[x][y] = 'O';
 		}
-		return false;
+		return gameBoard;
 		}
 	} // closes tic method
 
