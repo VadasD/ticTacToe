@@ -11,6 +11,7 @@ public class Game {
 	public static void main(String[] args) {
 		/* declares class */
 		/* initialize 2d array */
+		int turnCounter = 0;
 		char[][] gameBoard = new char[3][3];
 		/* Input array data */
 		boolean gameStatus;
@@ -19,13 +20,18 @@ public class Game {
 		System.out.println("shall we play a game?");
 
 		/* Check if win condition has been met */
-		while (gameStatus(gameBoard)){
-		printDatBoard(gameBoard);
-		System.out.println("It's " + WhoseTurn(p1) + "'s turn.");
-		tic(gameBoard, p1);
-		p1 = !p1;/* apparently functions as a turn counter */
-		}//closes while loop
-}//closes main method
+		while (gameStatus(gameBoard)) {
+			printDatBoard(gameBoard);
+			System.out.println("It's " + WhoseTurn(p1) + "'s turn.");
+			tic(gameBoard, p1);
+			p1 = !p1;
+			turnCounter++;
+			if((turnCounter)==9){
+				System.out.print("Tied Game");
+				break;}/* apparently functions as a turn counter */
+			
+		}// closes while loop
+	}// closes main method
 
 	/**
 	 * 
@@ -49,23 +55,31 @@ public class Game {
 	 * @return
 	 */
 	public static char[][] tic(char[][] gameBoard, boolean p1) {
-		while(true){
 		Scanner xi = new Scanner(System.in);
-		Scanner yi = new Scanner(System.in);
-		System.out.println("Enter desired X coordinate");
-		int x = xi.nextInt();
-		System.out.println("Enter desired Y coordinate");
-		int y = yi.nextInt();
-		if(p1 && gameBoard[x][y] != 'X'|'O')
-		//if (gameBoard[x][y] == ('X'|'O')){
-			//System.out.println("try again");
-			//return false;}//im trying to check valid moves
-		if (p1) {
-			gameBoard[x][y] = 'X';
-		} else {
-			gameBoard[x][y] = 'O';
-		}
-		return gameBoard;
+		while (true) {
+			System.out.println("Enter desired X coordinate");
+			int x = xi.nextInt();
+			if (x<0 || x>2) {
+				System.out.println("please enter a valid cordinate point (0-2)");
+			} else {
+
+				System.out.println("Enter desired Y coordinate");
+				int y = xi.nextInt();
+				if (y<0 || y>2){
+					System.out.println("please enter a valid cordinate point (0-2)");
+				} else {
+					if (gameBoard[x][y] == 'X' || gameBoard[x][y] == 'O') {
+						System.out.println("try again");
+					} else {
+						if (p1) {
+							gameBoard[x][y] = 'X';
+						} else {
+							gameBoard[x][y] = 'O';
+						}
+						return gameBoard;
+					}
+				}
+			}
 		}
 	} // closes tic method
 
@@ -87,7 +101,7 @@ public class Game {
 		for (int x = 0; x < 3; x++) { // check for vertical pattern
 			for (int y = 0; y < 3; y++) {
 				current = gameBoard[x][y];
-				if (last == current && last != 0) {
+				if (last == current && current != 0) {
 					counter++; // keep track of how many in a row we've found
 				}
 				if (counter == 2) {
@@ -97,11 +111,12 @@ public class Game {
 				last = current;
 			}
 		}
-		counter = 0; // reset the counter back to 0 before the next check
+		counter = 0; 
+		last = '1';// reset the counter back to 0 before the next check
 		for (int y = 0; y < 3; y++) { // check for a horizontal pattern
 			for (int x = 0; x < 3; x++) {
 				current = gameBoard[x][y];
-				if (last == current && last != 0) {
+				if (last == current && current != 0) {
 					counter++;
 				}
 				if (counter == 2) {
@@ -111,10 +126,11 @@ public class Game {
 				last = current;
 			}
 		}
-		counter = 0; // reset the counter back to 0 before the next check
+		counter = 0; 
+		last = '1'; // reset the counter back to 0 before the next check
 		for (int y = 0; y < 3; y++) { // check for a diagnal down pattern
 			current = gameBoard[y][y];
-			if (last == current && last != 0) {
+			if (last == current && current != 0) {
 				counter++;
 			}
 			if (counter == 2) {
@@ -123,10 +139,11 @@ public class Game {
 			}
 			last = current;
 		}
-		counter = 0; // reset the counter back to 0 before the next check
+		counter = 0; 
+		last = '1';// reset the counter back to 0 before the next check
 		for (int x = 0; x < 3; x++) { // check for a diagnal up pattern
 			current = gameBoard[x][yDiag];
-			if (last == current && last != 0) {
+			if (last == current && current != 0) {
 				counter++;
 			}
 			if (counter == 2) {
@@ -138,15 +155,16 @@ public class Game {
 		}
 		return true;
 	}// closes gameStatus method
-		public static String WhoseTurn(boolean p1) { // handy little method to
-			// return a string of
-			// who's turn it is.
-if (p1) {
-return "Player 1";
-} else {
-return "Player 2";
-	}
+
+	public static String WhoseTurn(boolean p1) { // handy little method to
+		// return a string of
+		// who's turn it is.
+		if (p1) {
+			return "Player 1";
+		} else {
+			return "Player 2";
 		}
+	}
 }// closes Game class
 
 /* if tie condition has been met display MSG & end */
